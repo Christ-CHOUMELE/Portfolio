@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christ CHOUMELE | Portfolio Élève-Ingénieur</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS (Gère toutes les couleurs et styles) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
+                        dark: { bg: '#090d16', card: '#111726', border: '#1e293b' }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#090d16] text-slate-200 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- ================================================================= -->
+    <!-- HEADER & BARRE DE NAVIGATION FIXE (AVEC MENU BURGER MOBILE)       -->
+    <!-- ================================================================= -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#090d16]/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Nom -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-indigo-500/20">
+                    C
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-white tracking-tight text-lg">Christ <span class="text-indigo-400">CHOUMELE</span></span>
+                    <span class="text-xs text-slate-400 font-mono">Élève-Ingénieur Informatique @ CESI</span>
+                </div>
+            </a>
+
+            <!-- Liens Navigation Desktop (Masqués sur mobile) -->
+            <div class="hidden md:flex items-center gap-1 bg-[#111726]/80 p-1.5 rounded-2xl border border-slate-800 text-sm">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium shadow-md">Accueil</button>
+                <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition">À Propos</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition">Projets</button>
+                <button onclick="switchTab('skills')" id="nav-skills" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition">Compétences</button>
+                <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition">Contact</button>
+            </div>
+
+            <!-- Actions Droite : Bouton CV (Desktop) + Bouton Burger 3 Barres (Mobile) -->
+            <div class="flex items-center gap-3">
+                
+                <!-- Bouton Téléchargement CV -->
+                <a href="CV_Christ_CHOUMELE.pdf" download="CV_Christ_CHOUMELE.pdf" class="hidden sm:inline-flex px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-md transition items-center gap-2 text-sm">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Télécharger mon CV</span>
+                </a>
+
+                <!-- Bouton Burger (3 Barres) - Visible uniquement sur Mobile/Tablette -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="flex md:hidden w-11 h-11 rounded-xl bg-[#111726] border border-slate-800 text-slate-200 items-center justify-center text-xl hover:bg-slate-800 transition-all cursor-pointer">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MENU DÉROULANT MOBILE (S'ouvre sous la barre au clic sur les 3 barres) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#090d16] border-b border-slate-800 px-4 py-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-slate-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-house text-indigo-400"></i> Accueil
+            </button>
+            <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-slate-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-user text-indigo-400"></i> À Propos
+            </button>
+            <button onclick="switchTab('projects'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-slate-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-code text-indigo-400"></i> Mes Projets
+            </button>
+            <button onclick="switchTab('skills'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-slate-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-layer-group text-indigo-400"></i> Compétences
+            </button>
+            <button onclick="switchTab('contact'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-slate-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-paper-plane text-indigo-400"></i> Contact
+            </button>
+            
+            <div class="pt-2 border-t border-slate-800/80 sm:hidden">
+                <a href="CV_Christ_CHOUMELE.pdf" download="CV_Christ_CHOUMELE.pdf" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-md transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Télécharger mon CV</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================================================================= -->
+    <!-- CONTENU PRINCIPAL                                                -->
+    <!-- ================================================================= -->
+    <main class="pt-32 pb-16 flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- ====================================================================================== -->
+        <!-- SECTION 1 : ACCUEIL / HERO -->
+        <!-- ====================================================================================== -->
+        <section id="tab-home" class="tab-content active space-y-10">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-12 gap-8 items-center min-h-[60vh]">
+                
+                <!-- COLONNE GAUCHE : Textes & Boutons -->
+                <div class="md:col-span-8 space-y-6">
+                    
+                    <!-- Badge Vert Pulsant -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Disponible pour un stage et alternance en informatique
+                    </div>
+
+                    <!-- Titre & Nom -->
+                    <div class="space-y-1">
+                        <span class="text-slate-400 text-lg font-medium">Bonjour, je suis</span>
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none">
+                            Christ <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200">CHOUMELE</span>
+                        </h1>
+                    </div>
+
+                    <!-- Sous-titre -->
+                    <p class="text-slate-300 text-base sm:text-lg font-normal leading-relaxed max-w-2xl">
+                        Cycle Préparatoire Intégré Ingénieur (2ᵉ année) · <strong class="text-white">CESI Lyon (Villeurbanne)</strong> <br>
+                        Recherche de stage & alternance en informatique
+                    </p>
+
+                    <!-- DOUBLE LIGNE DE BOUTONS -->
+                    <div class="space-y-3 pt-2">
+                        <!-- Ligne 1 : Navigation Interne -->
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="switchTab('about')" class="px-4 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500 hover:text-indigo-400 text-slate-200 font-medium text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-user text-indigo-400"></i> À propos de moi
+                            </button>
+                            <button onclick="switchTab('projects')" class="px-4 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500 hover:text-indigo-400 text-slate-200 font-medium text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-code text-indigo-400"></i> Mes Projets
+                            </button>
+                            <button onclick="switchTab('skills')" class="px-4 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500 hover:text-indigo-400 text-slate-200 font-medium text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-indigo-400"></i> Compétences
+                            </button>
+                        </div>
+
+                        <!-- Ligne 2 : Liens & Actions -->
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/Christ-CHOUMELE" target="_blank" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                                <i class="fa-brands fa-github text-base"></i> GitHub
+                            </a>
+                            <a href="CV_Christ_CHOUMELE.pdf" download="CV_Christ_CHOUMELE.pdf" class="px-4 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500 hover:text-indigo-400 text-slate-200 font-medium text-sm transition-all inline-flex items-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-indigo-400"></i>
+                                <span>Télécharger mon CV</span>
+                            </a>
+                            <button onclick="switchTab('contact')" class="px-5 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500/40 text-slate-200 text-xs font-semibold flex items-center gap-2 transition-all group cursor-pointer">
+                                <i class="fa-solid fa-paper-plane text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                                <span>Me contacter</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLONNE DROITE : Photo circulaire -->
+                <div class="md:col-span-4 flex justify-center">
+                    <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full p-1.5 bg-gradient-to-tr from-indigo-500 via-purple-400 to-indigo-300 shadow-2xl shadow-indigo-500/20">
+                        <div class="w-full h-full rounded-full bg-[#090d16] overflow-hidden flex items-center justify-center border-4 border-[#090d16]">
+                            <img src="photo.jpg" alt="Christ CHOUMELE" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'flex flex-col items-center justify-center text-center p-4\'><i class=\'fa-solid fa-user-tie text-5xl text-indigo-400\'></i></div>';">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+       <!-- ================================================================= -->
+        <!-- SECTION 2 : À PROPOS DE MOI (id="tab-about")                      -->
+        <!-- ================================================================= -->
+        <section id="tab-about" class="tab-content hidden space-y-10">
+            
+            <!-- Titre de la section -->
+            <div class="max-w-3xl space-y-2">
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">À propos de moi</h2>
+                <p class="text-slate-400 text-sm font-mono">Mon profil d'élève-ingénieur, mes atouts et mon parcours académique.</p>
+            </div>
+
+            <!-- Grille 2 colonnes -->
+            <div class="grid md:grid-cols-12 gap-8">
+                
+                <!-- COLONNE GAUCHE : Présentation & Soft Skills -->
+                <div class="md:col-span-6 space-y-6">
+                    
+                    <!-- Carte 1 : Vision & Présentation -->
+                    <div class="bg-[#111726] p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-user-gear text-indigo-400"></i> Profil & Objectifs
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Actuellement en 2ᵉ année de Cycle Préparatoire d'Ingénieur au <strong>CESI Lyon</strong>, je me passionne pour la conception logicielle, la Data, l'IA et l'administration des réseaux.
+                        </p>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Grâce à la pédagogie par projets du CESI et à mon parcours antérieur en Gestion des SI, j'ai développé une grande capacité d'apprentissage rapide, de l'autonomie et une approche méthodique face aux problèmes complexes.
+                        </p>
+                    </div>
+
+                    <!-- Carte 2 : Soft Skills & Atouts -->
+                    <div class="bg-[#111726] p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-lightbulb text-indigo-400"></i> Soft Skills & Savoir-être
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3 pt-1">
+                            <div class="p-3 rounded-xl bg-[#090d16] border border-slate-800/60">
+                                <span class="block text-xs font-bold text-white">Esprit d'équipe</span>
+                                <span class="text-[11px] text-slate-400">Entraide & projets de groupe</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-[#090d16] border border-slate-800/60">
+                                <span class="block text-xs font-bold text-white">Rigueur & Organisation</span>
+                                <span class="text-[11px] text-slate-400">Gestion des délais stricts</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-[#090d16] border border-slate-800/60">
+                                <span class="block text-xs font-bold text-white">Adaptabilité</span>
+                                <span class="text-[11px] text-slate-400">Montée en compétences rapide</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-[#090d16] border border-slate-800/60">
+                                <span class="block text-xs font-bold text-white">Gestion du stress</span>
+                                <span class="text-[11px] text-slate-400">Réactivité & sang-froid</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLONNE DROITE : Parcours Académique (Frise) -->
+                <div class="md:col-span-6 bg-[#111726] p-6 rounded-2xl border border-slate-800 space-y-6">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-graduation-cap text-indigo-400"></i> Parcours Académique
+                    </h3>
+
+                    <!-- Ligne du temps -->
+                    <div class="space-y-6 relative pl-6 border-l-2 border-slate-800">
+                        
+                        <!-- CESI -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[#111726]"></span>
+                            <span class="text-xs font-mono text-indigo-400">Sept. 2025 – Présent</span>
+                            <h4 class="text-base font-bold text-white">Cycle Préparatoire Intégré Informatique (2ᵉ année)</h4>
+                            <p class="text-xs text-slate-400">CESI École d'Ingénieurs — Villeurbanne / Lyon</p>
+                            <p class="text-xs text-slate-300 mt-1">Développement de l'esprit d'analyse, résolution de problèmes et projets en équipe.</p>
+                        </div>
+
+                        <!-- BTS GSI -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-600 border-4 border-[#111726]"></span>
+                            <span class="text-xs font-mono text-slate-400">Sept. 2024 – Juil. 2025</span>
+                            <h4 class="text-base font-bold text-white">BTS Gestion des Systèmes d'Information (1re année)</h4>
+                            <p class="text-xs text-slate-400">IUSTE — Yaoundé, Cameroun</p>
+                            <p class="text-xs text-slate-300 mt-1">Bases solides en bases de données, POO Java et administration réseau.</p>
+                        </div>
+
+                        <!-- Baccalauréat -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-600 border-4 border-[#111726]"></span>
+                            <span class="text-xs font-mono text-slate-400">Juin 2024</span>
+                            <h4 class="text-base font-bold text-white">Baccalauréat Mathématiques & Physique</h4>
+                            <p class="text-xs text-slate-400">Mention Bien — Lycée de Bansoa-Mbri</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- BLOC DE REDIRECTION VERS LA SECTION SUIVANTE (PROJETS) -->
+            <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-slate-400">
+                    Envie de voir mes réalisations techniques et projets académiques ?
+                </p>
+                <button onclick="switchTab('projects')" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2 group">
+                    <span>Découvrir mes projets</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 3 : MES PROJETS (id="tab-projects")                        -->
+        <!-- ================================================================= -->
+        <section id="tab-projects" class="tab-content hidden space-y-10">
+            
+            <!-- En-tête de section -->
+            <div class="max-w-3xl space-y-2">
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">Mes Projets</h2>
+                <p class="text-slate-400 text-sm font-mono">Cliquez sur une image pour l'agrandir ou sur "Détails du projet" pour en savoir plus.</p>
+            </div>
+
+            <!-- CONTENEUR DYNAMIQUE DES PROJETS -->
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Les cartes sont générées par le JavaScript -->
+            </div>
+
+            <!-- REDIRECTION COMPÉTENCES -->
+            <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-slate-400">
+                    Découvrez l'ensemble des compétences techniques et outils que je maîtrise.
+                </p>
+                <button onclick="switchTab('skills')" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2 group">
+                    <span>Voir mes compétences</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+        </section>
+
+    <!-- ================================================================= -->
+    <!-- FENÊTRES MODALES (AGRANDISSEMENT IMAGE + DÉTAILS PROJET)          -->
+    <!-- ================================================================= -->
+    
+    <!-- Modale Image Agrandie -->
+    <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-indigo-400 text-sm font-bold transition-colors">
+                <i class="fa-solid fa-xmark mr-1"></i> Fermer
+            </button>
+            <div class="w-full h-full rounded-2xl overflow-hidden border border-slate-700 bg-slate-900 flex items-center justify-center p-2" id="modal-img-container">
+            </div>
+            <p id="modal-img-caption" class="mt-3 text-slate-300 font-medium text-sm text-center"></p>
+        </div>
+    </div>
+
+    <!-- Modale Détails du Projet -->
+    <div id="details-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeDetailsModal()">
+        <div class="bg-[#111726] border border-slate-700 max-w-2xl w-full rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4" onclick="event.stopPropagation()">
+            <button onclick="closeDetailsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-details-content">
+                <!-- Contenu injecté par JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================= -->
+        <!-- SECTION 4 : MES COMPÉTENCES (id="tab-skills")                      -->
+        <!-- ================================================================= -->
+        <section id="tab-skills" class="tab-content hidden space-y-10">
+            
+            <!-- En-tête de section -->
+            <div class="max-w-3xl space-y-2">
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">Mes Compétences</h2>
+                <p class="text-slate-400 text-sm font-mono">Vue d'ensemble de mes compétences techniques et savoir-être, classées par secteurs d'activité.</p>
+            </div>
+
+            <!-- CONTENEUR GÉNÉRÉ DYNAMIQUEMENT PAR JAVASCRIPT -->
+            <div id="skills-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Les cartes de compétences s'injecteront automatiquement ici -->
+            </div>
+
+            <!-- REDIRECTION VERS LA SECTION CONTACT (Inclus dynamiquement ou fixe ici) -->
+            <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-slate-400">
+                    Un projet en tête ou une opportunité d'alternance/stage ?
+                </p>
+                <button onclick="switchTab('contact')" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2 group">
+                    <span>Me contacter</span>
+                    <i class="fa-solid fa-paper-plane text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- ================================================================= -->
+        <!-- SECTION 5 : CONTACT & MESSAGERIE (id="tab-contact")               -->
+        <!-- ================================================================= -->
+        <section id="tab-contact" class="tab-content hidden space-y-10">
+            
+            <!-- En-tête de la section -->
+            <div class="max-w-3xl space-y-2">
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">Me Contacter</h2>
+                <p class="text-slate-400 text-sm font-mono">Une opportunité d'alternance, de stage ou une question ? N'hésitez pas à me laisser un message.</p>
+            </div>
+
+            <!-- Grille 2 colonnes : Informations à gauche / Formulaire à droite -->
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- COLONNE GAUCHE (2/5) : COORDONNÉES ET LIENS DIRECTS           -->
+                <!-- ------------------------------------------------------------- -->
+                <div class="lg:col-span-2 space-y-4">
+                    
+                    <!-- CARTE 1 : E-MAIL DIRECT -->
+                    <a href="mailto:choumelechrist05@gmail.com" class="bg-[#111726] border border-slate-800 hover:border-indigo-500/50 p-4 rounded-2xl flex items-center gap-4 transition-all group block">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-lg border border-indigo-500/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Adresse E-mail</span>
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-indigo-400 transition-colors truncate block">choumelechrist05@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <!-- CARTE 2 : LINKEDIN -->
+                    <a href="https://www.linkedin.com/in/christ-choumele-b6445b38a/" target="_blank" rel="noopener noreferrer" class="bg-[#111726] border border-slate-800 hover:border-blue-500/50 p-4 rounded-2xl flex items-center gap-4 transition-all group block">
+                        <div class="w-11 h-11 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center text-lg border border-blue-500/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Profil LinkedIn</span>
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-blue-400 transition-colors truncate block">linkedin.com/in/christ-choumele</span>
+                        </div>
+                    </a>
+
+                    <!-- CARTE 3 : GITHUB -->
+                    <a href="https://github.com/Christ-CHOUMELE" target="_blank" rel="noopener noreferrer" class="bg-[#111726] border border-slate-800 hover:border-purple-500/50 p-4 rounded-2xl flex items-center gap-4 transition-all group block">
+                        <div class="w-11 h-11 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-lg border border-purple-500/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Compte GitHub</span>
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-purple-400 transition-colors truncate block">github.com/christ-choumele</span>
+                        </div>
+                    </a>
+
+                    <!-- CARTE 4 : TÉLÉPHONE -->
+                    <a href="tel:+33743659629" class="bg-[#111726] border border-slate-800 hover:border-emerald-500/50 p-4 rounded-2xl flex items-center gap-4 transition-all group block">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Téléphone</span>
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-emerald-400 transition-colors">07 43 65 96 29</span>
+                        </div>
+                    </a>
+
+
+                    <!-- CARTE 5 : LOCALISATION (AVEC EFFET AU SURVOL) -->
+                    <div class="bg-[#111726] border border-slate-800 hover:border-amber-500/50 p-4 rounded-2xl flex items-center gap-4 transition-all group cursor-default">
+                        <div class="w-11 h-11 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center text-lg border border-amber-500/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Localisation</span>
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-amber-400 transition-colors">Villeurbanne (69100) / Lyon</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- COLONNE DROITE (3/5) : FORMULAIRE AVEC OBJET DÉROULANT       -->
+                <!-- ------------------------------------------------------------- -->
+                <div class="lg:col-span-3 bg-[#111726] border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
+                    
+                    <form id="contact-form" action="https://formspree.io/f/xzeevlzv" method="POST" class="space-y-4">
+                        
+                        <!-- Champ : Nom & Prénom -->
+                        <div class="space-y-1.5">
+                            <label for="name" class="text-xs font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-user text-indigo-400"></i> Votre Nom & Prénom
+                            </label>
+                            <input type="text" id="name" name="name" required placeholder="Ex: Jean Dupont" class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+
+                        <!-- Champ : Adresse E-mail -->
+                        <div class="space-y-1.5">
+                            <label for="email" class="text-xs font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-at text-indigo-400"></i> Votre Adresse E-mail
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="Ex: jean.dupont@entreprise.com" class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+
+                        <!-- Champ : Liste déroulante des sujets (Sujet principal) -->
+                        <div class="space-y-1.5">
+                            <label for="subject-select" class="text-xs font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-indigo-400"></i> Objet du message
+                            </label>
+                            <select id="subject-select" name="subject_category" onchange="handleSubjectChange()" required class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                <option value="" disabled selected>Choisissez l'objet de votre message...</option>
+                                <option value="Proposition de Stage / Alternance">Proposition de Stage / Alternance</option>
+                                <option value="Question sur un Projet">Question sur un Projet</option>
+                                <option value="Demande d'informations">Demande d'informations</option>
+                                <option value="Autre">Autre (à préciser)</option>
+                            </select>
+                        </div>
+
+                        <!-- Champ dynamique supplémentaire (Masqué par défaut, s'affiche si "Autre" est choisi) -->
+                        <div id="other-subject-container" class="space-y-1.5 hidden">
+                            <label for="custom-subject" class="text-xs font-semibold text-indigo-400 flex items-center gap-2">
+                                <i class="fa-solid fa-pen-to-square"></i> Précisez votre objet
+                            </label>
+                            <input type="text" id="custom-subject" name="custom_subject" placeholder="Précisez le sujet de votre message..." class="w-full bg-slate-900/90 border border-indigo-500/50 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+
+                        <!-- Champ : Message -->
+                        <div class="space-y-1.5">
+                            <label for="message" class="text-xs font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-comment-dots text-indigo-400"></i> Votre Message
+                            </label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Écrivez votre message ici..." class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <!-- ZONE D'AFFICHAGE DU MESSAGE DE CONFIRMATION / ERREUR -->
+                        <div id="form-status" class="hidden"></div>
+
+                        <!-- BOUTON D'ENVOI UNIQUE -->
+                        <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 group">
+                            <span>Envoyer le message</span>
+                            <i class="fa-solid fa-paper-plane text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-[#090d16] py-6 text-center text-xs text-slate-500">
+        © 2026 Christ CHOUMELE — Tous droits réservés.
+    </footer>
+
+
+<!-- ================================================================= -->
+    <!-- SCRIPT JAVASCRIPT CENTRALISÉ                                      -->
+    <!-- ================================================================= -->
+    <script>
+        /* -------------------------------------------------------------------
+           1. LISTE DES PROJETS (Noms d'images uniformisés : projet1.jpg, etc.)
+           ------------------------------------------------------------------- */
+        const MY_PROJECTS = [
+            {
+                id: 1,
+                title: "Portfolio Web Interactif",
+                category: "Web / SPA",
+                badgeColor: "bg-indigo-600/90",
+                image: "projet1.jpg", // Image : projet1.jpg
+                shortDesc: "Single Page Application personnalisée en thème sombre avec navigation JavaScript fluide et design responsive.",
+                fullDesc: "Conception et développement d'un portfolio web responsive en Single Page Application (SPA). L'objectif est de présenter mon profil d'élève-ingénieur CESI, mes compétences et mon parcours de manière claire et moderne aux recruteurs.",
+                context: "Projet Personnel & Valorisation Professionnelle (2026)",
+                features: [
+                    "Architecture SPA sans rechargement de page",
+                    "Design Thème Sombre 'Glassmorphism' avec Tailwind CSS",
+                    "Système de modales pour agrandissement d'images et fiches détaillées",
+                    "Ergonomie optimisée et boutons de guidage direct"
+                ],
+                tech: ["HTML5", "Tailwind CSS", "JavaScript ES6", "FontAwesome"],
+                githubUrl: "https://github.com/ton-pseudo/portfolio",
+                githubAvailable: true
+            },
+            {
+                id: 2,
+                title: "Gestionnaire de Données POO",
+                category: "Logiciel Java",
+                badgeColor: "bg-purple-600/90",
+                image: "projet2.jpg", // Image : projet2.jpg
+                shortDesc: "Application de gestion orientée objet développée en Java avec persistance de données et gestion d'inventaire.",
+                fullDesc: "Application de gestion développée en Java orientée objet. Le projet visait à automatiser la manipulation et la structuration de données métiers avec enregistrement et lecture de données.",
+                context: "Projet Académique / BTS GSI (2024 - 2025)",
+                features: [
+                    "Conception des classes selon les principes de la POO (Encapsulation, Héritage)",
+                    "Gestion de l'inventaire et requêtage de base de données MySQL",
+                    "Interface claire avec gestion de la saisie et contrôle d'erreurs"
+                ],
+                tech: ["Java", "POO", "MySQL", "NetBeans IDE"],
+                githubUrl: null,
+                githubAvailable: false
+            },
+            {
+                id: 3,
+                title: "Modélisation Réseau & Subnetting",
+                category: "Infrastructures",
+                badgeColor: "bg-emerald-600/90",
+                image: "projet3.jpg", // Image : projet3.jpg
+                shortDesc: "Architecture d'entreprise avec routage dynamique, création de VLANs sécurisés et plan d'adressage IP.",
+                fullDesc: "Conception et simulation de l'infrastructure réseau d'une entreprise multi-sites sur Cisco Packet Tracer. Calcul et découpage d'adressage IP (VLSM) et mise en place d'une politique de sécurité par VLANs.",
+                context: "Projet d'Infrastructure Réseau CESI Lyon (2025)",
+                features: [
+                    "Découpage et plan d'adressage IPv4 optimisé (Subnetting / VLSM)",
+                    "Configuration des commutateurs (VLANs, Trunking 802.1Q)",
+                    "Routage inter-VLAN et test de connectivité sous Packet Tracer"
+                ],
+                tech: ["Packet Tracer", "VLAN", "IPv4 / Subnetting"],
+                githubUrl: null,
+                githubAvailable: false
+            }
+        ];
+
+        /* -------------------------------------------------------------------
+           2. GÉNÉRATION DES CARTES PROJETS
+           ------------------------------------------------------------------- */
+        function renderProjects() {
+            const container = document.getElementById('projects-grid');
+            if (!container) return;
+
+            container.innerHTML = MY_PROJECTS.map(project => {
+                const githubBtnHTML = project.githubAvailable 
+                    ? `<a href="${project.githubUrl}" target="_blank" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-brands fa-github text-sm"></i> Code GitHub
+                       </a>`
+                    : `<button onclick="alert('Le code source de ce projet sera bientôt disponible sur GitHub !')" class="w-full py-2 px-3 rounded-xl bg-slate-800/60 text-slate-400 text-xs font-medium flex items-center justify-center gap-2 border border-slate-700/50 hover:text-slate-200 transition-colors">
+                        <i class="fa-solid fa-clock text-amber-400"></i> Code bientôt disponible
+                       </button>`;
+
+                return `
+                    <div class="bg-[#111726] border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all group flex flex-col justify-between">
+                        <div>
+                            <!-- Zone Image -->
+                            <div onclick="openImageModal('${project.image}', '${project.title}')" class="relative h-48 bg-slate-900 overflow-hidden border-b border-slate-800 cursor-zoom-in group/img">
+                                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'w-full h-full flex flex-col items-center justify-center bg-indigo-950/30 text-indigo-400 font-mono text-xs gap-2\\'><i class=\\'fa-solid fa-expand text-xl opacity-70\\'></i><i class=\\'fa-solid fa-code text-3xl\\'></i><span>Cliquez pour agrandir</span></div>';">
+                                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full ${project.badgeColor} text-white text-[10px] font-bold tracking-wide">${project.category}</span>
+                            </div>
+
+                            <!-- Contenu -->
+                            <div class="p-5 space-y-3">
+                                <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">${project.title}</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed">${project.shortDesc}</p>
+                                
+                                <div class="flex flex-wrap gap-1.5 pt-1">
+                                    ${project.tech.map(t => `<span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 font-mono text-[11px]">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="p-5 pt-0 space-y-2">
+                            <button onclick="openProjectDetails(${project.id})" class="w-full py-2 px-3 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fa-solid fa-circle-info"></i> Détails du projet
+                            </button>
+                            ${githubBtnHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+
+
+
+        /* ===================================================================
+        3. NAVIGATION ENTRE LES ONGLETS (VERSION SÉCURISÉE)
+        =================================================================== */
+        /* ===================================================================
+            NAVIGATION AVEC GESTION DU BOUTON RETOUR NAVIGATEUR
+            =================================================================== */
+            function switchTab(tabId, pushToHistory = true) {
+                // 1. Masquer le message du formulaire si présent
+                const formStatus = document.getElementById('form-status');
+                if (formStatus) formStatus.classList.add('hidden');
+
+                // 2. Masquer tous les onglets
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.add('hidden');
+                    tab.classList.remove('active');
+                });
+
+                // 3. Réinitialiser les boutons
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-400');
+                });
+
+                // 4. Afficher l'onglet sélectionné
+                let selectedTab = document.getElementById('tab-' + tabId);
+                if (!selectedTab) selectedTab = document.getElementById(tabId);
+
+                if (selectedTab) {
+                    selectedTab.classList.remove('hidden');
+                    selectedTab.classList.add('active');
+                }
+
+                // 5. Activer le bouton de navigation correspondant
+                let selectedBtn = document.getElementById('nav-' + tabId);
+                if (!selectedBtn) selectedBtn = document.getElementById(tabId + '-btn');
+
+                if (selectedBtn) {
+                    selectedBtn.classList.remove('text-slate-400');
+                    selectedBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+                }
+
+                // 6. Ajouter l'onglet à l'historique du navigateur (si pushToHistory est vrai)
+                if (pushToHistory) {
+                    history.pushState({ tabId: tabId }, '', '#' + tabId);
+                }
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+        /* ===================================================================
+            GESTION DU BOUTON RETOUR / AVANT DU NAVIGATEUR (POPSTATE)
+            =================================================================== */
+            window.addEventListener('popstate', (event) => {
+                if (event.state && event.state.tabId) {
+                    // Change d'onglet sans ré-ajouter une entrée dans l'historique
+                    switchTab(event.state.tabId, false);
+                } else {
+                    // Si pas d'état (ex: retour à l'accueil initial), afficher l'accueil
+                    const hash = window.location.hash.replace('#', '') || 'home';
+                    switchTab(hash, false);
+                }
+            });
+
+            // Charger le bon onglet au chargement initial selon le lien (#contact, #projects, etc.)
+            document.addEventListener('DOMContentLoaded', () => {
+                const initialTab = window.location.hash.replace('#', '') || 'home';
+                // Remplace l'état initial pour que le premier retour fonctionne correctement
+                history.replaceState({ tabId: initialTab }, '', '#' + initialTab);
+            });
+
+        <!-- bouton burger pour mobile -->
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+
+
+        /* -------------------------------------------------------------------
+           4. MODALE IMAGE
+           ------------------------------------------------------------------- */
+        function openImageModal(imgSrc, caption) {
+            const modal = document.getElementById('image-modal');
+            const container = document.getElementById('modal-img-container');
+            const captionElem = document.getElementById('modal-img-caption');
+
+            container.innerHTML = `<img src="${imgSrc}" alt="${caption}" class="max-w-full max-h-[75vh] object-contain rounded-xl" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'p-10 text-center text-slate-400 font-mono text-sm\\'><i class=\\'fa-solid fa-image text-4xl mb-3 text-indigo-400 opacity-60 flex block\\'></i> Aperçu de : <br><strong class=\\'text-white text-base\\'>${caption}</strong><br><span class=\\'text-xs text-slate-500 mt-2 block\\'>(Nommez le fichier : ${imgSrc})</span></div>';">`;
+            captionElem.textContent = caption;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+
+
+
+        /* -------------------------------------------------------------------
+           5. MODALE DÉTAILS PROJET
+           ------------------------------------------------------------------- */
+        function openProjectDetails(id) {
+            const data = MY_PROJECTS.find(p => p.id === id);
+            if (!data) return;
+
+            const content = document.getElementById('modal-details-content');
+            content.innerHTML = `
+                <div class="border-b border-slate-800 pb-3">
+                    <span class="text-xs font-mono text-indigo-400">${data.context}</span>
+                    <h3 class="text-xl font-bold text-white mt-1">${data.title}</h3>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Contexte & Description</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${data.fullDesc}</p>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Réalisations Clés</h4>
+                    <ul class="space-y-1 text-xs text-slate-300">
+                        ${data.features.map(f => `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-indigo-400 mt-0.5"></i> ${f}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="pt-2">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Technologies Utilisées</h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        ${data.tech.map(t => `<span class="px-2 py-1 rounded-md bg-slate-800 text-indigo-300 font-mono text-[11px] border border-slate-700">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            const modal = document.getElementById('details-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDetailsModal() {
+            const modal = document.getElementById('details-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Lancement au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+        });
+
+
+        // Fonction pour lancer le téléchargement direct sans ouvrir de page
+        function downloadCVDirect() {
+            const frame = document.getElementById('cv-download-frame');
+            if (frame) {
+                // Charge le CV en arrière-plan avec le paramètre de téléchargement
+                frame.src = 'cv.html?download=true&t=' + new Date().getTime();
+            }
+        }
+
+
+        /* ===================================================================
+            BASE DE DONNÉES DES COMPÉTENCES (FACILE À MODIFIER)
+            =================================================================== */
+            const SKILLS_DATA = [
+                {
+                    title: "Langages",
+                    subtitle: "Programmation & Web",
+                    icon: "fa-code",
+                    color: "indigo",
+                    skills: [
+                        { name: "HTML5 / CSS3", level: "85%", tag: "Avancé" },
+                        { name: "JavaScript", level: "75%", tag: "Intermédiaire" },
+                        { name: "Java (POO)", level: "65%", tag: "Intermédiaire" }
+                        // Tu peux ajouter une ligne ici en 5 secondes !
+                    ]
+                },
+                {
+                    title: "Réseaux & Systèmes",
+                    subtitle: "Infrastructures & Adressage",
+                    icon: "fa-network-wired",
+                    color: "purple",
+                    skills: [
+                        { name: "Adressage IPv4 / Subnetting", level: "85%", tag: "Avancé" },
+                        { name: "Cisco Packet Tracer", level: "75%", tag: "Intermédiaire" },
+                        { name: "VLANs & Configuration", level: "70%", tag: "Intermédiaire" }
+                    ]
+                },
+                {
+                    title: "Bases de données",
+                    subtitle: "SGBD & Modélisation",
+                    icon: "fa-database",
+                    color: "teal",
+                    skills: [
+                        { name: "MySQL / SQL", level: "75%", tag: "Intermédiaire" },
+                        { name: "phpMyAdmin", level: "70%", tag: "Intermédiaire" },
+                        { name: "Modélisation (MCD / MLD)", level: "60%", tag: "Bases" }
+                    ]
+                },
+                {
+                    title: "Outils",
+                    subtitle: "Logiciels & Environnement",
+                    icon: "fa-toolbox",
+                    color: "emerald",
+                    skills: [
+                        { name: "Git / GitHub", level: "75%", tag: "Intermédiaire" },
+                        { name: "VS Code / NetBeans", level: "85%", tag: "Avancé" }
+                    ]
+                }
+            ];
+
+            /* ===================================================================
+            FONCTION DE RENDU AUTOMATIQUE DES COMPÉTENCES
+            =================================================================== */
+            function renderSkills() {
+                const container = document.getElementById('skills-container');
+                if (!container) return;
+
+                container.innerHTML = SKILLS_DATA.map(category => {
+                    // Génération des barres de compétences pour chaque catégorie
+                    const skillsHTML = category.skills.map(s => `
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-200">${s.name}</span>
+                                <span class="text-${category.color}-400 font-mono">${s.tag}</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-${category.color}-500 h-full rounded-full" style="width: ${s.level}"></div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    return `
+                        <div class="bg-[#111726] border border-slate-800 rounded-2xl p-6 space-y-5 hover:border-${category.color}-500/40 transition-all">
+                            <div class="flex items-center gap-3 border-b border-slate-800/80 pb-4">
+                                <div class="w-10 h-10 rounded-xl bg-${category.color}-600/20 text-${category.color}-400 flex items-center justify-center text-lg border border-${category.color}-500/30">
+                                    <i class="fa-solid ${category.icon}"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-bold text-white">${category.title}</h3>
+                                    <p class="text-xs text-slate-400">${category.subtitle}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3.5">
+                                ${skillsHTML}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Appeler la fonction au chargement du DOM
+            document.addEventListener('DOMContentLoaded', () => {
+                if (typeof renderProjects === 'function') renderProjects();
+                renderSkills();
+            });
+
+
+
+
+
+        /* ===================================================================
+        GESTION DU CHAMP "AUTRE" DANS LE FORMULAIRE DE CONTACT
+        =================================================================== */
+        function handleSubjectChange() {
+            const select = document.getElementById('subject-select');
+            const customContainer = document.getElementById('other-subject-container');
+            const customInput = document.getElementById('custom-subject');
+
+            if (select.value === 'Autre') {
+                // Affiche la case texte personnalisée
+                customContainer.classList.remove('hidden');
+                customInput.setAttribute('required', 'required'); // Rend le champ obligatoire
+                customInput.focus();
+            } else {
+                // Masque la case et retire l'obligation
+                customContainer.classList.add('hidden');
+                customInput.removeAttribute('required');
+                customInput.value = '';
+            }
+        }
+
+
+
+
+        /* ===================================================================
+        SOUMISSION DU FORMULAIRE SANS REDIRECTION AVEC MASQUAGE AUTOMATIQUE
+        =================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault(); // Empêche la redirection par défaut
+
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalBtnHTML = submitBtn.innerHTML;
+
+                    // Indique l'envoi en cours sur le bouton
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = `<span>Envoi en cours...</span> <i class="fa-solid fa-spinner fa-spin text-xs"></i>`;
+
+                    const formData = new FormData(contactForm);
+
+                    try {
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            // Message de succès
+                            formStatus.className = "p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center justify-between gap-2 transition-all duration-500";
+                            formStatus.innerHTML = `
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-base"></i>
+                                    <span>Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.</span>
+                                </div>
+                            `;
+                            formStatus.classList.remove('hidden');
+
+                            contactForm.reset(); // Réinitialise les champs
+
+                            // Si la case "Autre" était affichée, on la masque à nouveau
+                            const customContainer = document.getElementById('other-subject-container');
+                            if (customContainer) customContainer.classList.add('hidden');
+
+                            // DISPARITION AUTOMATIQUE APRÈS 5 SECONDES
+                            setTimeout(() => {
+                                formStatus.classList.add('hidden');
+                            }, 5000);
+
+                        } else {
+                            throw new Error('Erreur lors de l\'envoi');
+                        }
+                    } catch (error) {
+                        // Message d'erreur
+                        formStatus.className = "p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold flex items-center justify-between gap-2 transition-all duration-500";
+                        formStatus.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                                <span>Une erreur est survenue lors de l'envoi. Veuillez reéssayer.</span>
+                            </div>
+                        `;
+                        formStatus.classList.remove('hidden');
+
+                        // Masque également le message d'erreur après 5 secondes
+                        setTimeout(() => {
+                            formStatus.classList.add('hidden');
+                        }, 5000);
+                    } finally {
+                        // Rétablit le bouton
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnHTML;
+                    }
+                });
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
