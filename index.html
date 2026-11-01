@@ -110,10 +110,20 @@
         <!-- SECTION 1 : ACCUEIL / HERO -->
         <!-- ====================================================================================== -->
         <section id="tab-home" class="tab-content active space-y-10">
+            
             <div class="max-w-5xl mx-auto grid md:grid-cols-12 gap-8 items-center min-h-[60vh]">
                 
-                <!-- COLONNE GAUCHE : Textes & Boutons -->
-                <div class="md:col-span-8 space-y-6">
+                <!-- COLONNE 1 : Photo circulaire (En HAUT sur mobile, à DROITE sur PC) -->
+                <div class="order-first md:order-last md:col-span-4 flex justify-center">
+                    <div class="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full p-1.5 bg-gradient-to-tr from-indigo-500 via-purple-400 to-indigo-300 shadow-2xl shadow-indigo-500/20">
+                        <div class="w-full h-full rounded-full bg-[#090d16] overflow-hidden flex items-center justify-center border-4 border-[#090d16]">
+                            <img src="photo.jpg" alt="Christ CHOUMELE" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'flex flex-col items-center justify-center text-center p-4\'><i class=\'fa-solid fa-user-tie text-5xl text-indigo-400\'></i></div>';">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLONNE 2 : Textes & Boutons (En DESSOUS sur mobile, à GAUCHE sur PC) -->
+                <div class="order-last md:order-first md:col-span-8 space-y-6 text-center md:text-left">
                     
                     <!-- Badge Vert Pulsant -->
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
@@ -131,7 +141,7 @@
                     </div>
 
                     <!-- Sous-titre -->
-                    <p class="text-slate-300 text-base sm:text-lg font-normal leading-relaxed max-w-2xl">
+                    <p class="text-slate-300 text-base sm:text-lg font-normal leading-relaxed max-w-2xl mx-auto md:mx-0">
                         Cycle Préparatoire Intégré Ingénieur (2ᵉ année) · <strong class="text-white">CESI Lyon (Villeurbanne)</strong> <br>
                         Recherche de stage & alternance en informatique
                     </p>
@@ -139,7 +149,7 @@
                     <!-- DOUBLE LIGNE DE BOUTONS -->
                     <div class="space-y-3 pt-2">
                         <!-- Ligne 1 : Navigation Interne -->
-                        <div class="flex flex-wrap gap-3">
+                        <div class="flex flex-wrap justify-center md:justify-start gap-3">
                             <button onclick="switchTab('about')" class="px-4 py-2.5 rounded-xl bg-[#111726] border border-slate-800 hover:border-indigo-500 hover:text-indigo-400 text-slate-200 font-medium text-sm transition-all flex items-center gap-2">
                                 <i class="fa-solid fa-user text-indigo-400"></i> À propos de moi
                             </button>
@@ -152,7 +162,7 @@
                         </div>
 
                         <!-- Ligne 2 : Liens & Actions -->
-                        <div class="flex flex-wrap gap-3">
+                        <div class="flex flex-wrap justify-center md:justify-start gap-3">
                             <a href="https://github.com/Christ-CHOUMELE" target="_blank" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
                                 <i class="fa-brands fa-github text-base"></i> GitHub
                             </a>
@@ -164,15 +174,6 @@
                                 <i class="fa-solid fa-paper-plane text-indigo-400 group-hover:scale-110 transition-transform"></i>
                                 <span>Me contacter</span>
                             </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- COLONNE DROITE : Photo circulaire -->
-                <div class="md:col-span-4 flex justify-center">
-                    <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full p-1.5 bg-gradient-to-tr from-indigo-500 via-purple-400 to-indigo-300 shadow-2xl shadow-indigo-500/20">
-                        <div class="w-full h-full rounded-full bg-[#090d16] overflow-hidden flex items-center justify-center border-4 border-[#090d16]">
-                            <img src="photo.jpg" alt="Christ CHOUMELE" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'flex flex-col items-center justify-center text-center p-4\'><i class=\'fa-solid fa-user-tie text-5xl text-indigo-400\'></i></div>';">
                         </div>
                     </div>
                 </div>
